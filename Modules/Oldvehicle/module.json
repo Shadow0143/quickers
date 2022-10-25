@@ -1,0 +1,13 @@
+{
+    "name": "Oldvehicle",
+    "alias": "oldvehicle",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Oldvehicle\\Providers\\OldvehicleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
