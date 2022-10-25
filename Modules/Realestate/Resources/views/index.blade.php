@@ -1,5 +1,5 @@
-{{-- @extends('realestate::layouts.master') --}}
-@extends('layouts.app')
+@extends('realestate::layouts.master')
+{{-- @extends('layouts.app') --}}
 @section('title')
 <title>Realestate List</title>
 
