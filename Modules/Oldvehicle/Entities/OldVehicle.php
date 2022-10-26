@@ -10,9 +10,14 @@ class OldVehicle extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
     protected static function newFactory()
     {
         return \Modules\Oldvehicle\Database\factories\OldVehicleFactory::new();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(OldVehicleImage::class, 'vehicle_id');
     }
 }

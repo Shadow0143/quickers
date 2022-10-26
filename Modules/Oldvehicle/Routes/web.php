@@ -15,8 +15,11 @@ Route::prefix('oldvehicle')->group(function () {
     Route::get('/', 'OldvehicleController@index')->name('vehicleIndex');
     Route::get('/create-vehicle', 'OldvehicleController@createVehicle')->name('createVehicle');
     Route::post('/store-vehicle', 'OldvehicleController@storeVehicle')->name('storeVehicle');
+    Route::get('/edit-vehicle/{id}', 'OldvehicleController@editVehicle')->name('editVehicle');
     Route::get('/show-vehicle', 'OldvehicleController@showVehicle')->name('showVehicle');
-    Route::get('/edit-vehicle', 'OldvehicleController@editVehicle')->name('editVehicle');
-    Route::get('/update-vehicle', 'OldvehicleController@updateVehicle')->name('updateVehicle');
-    Route::get('/destroy-vehicle', 'OldvehicleController@destroyVehicle')->name('destroyVehicle');
+    Route::get('/status-vehicle', 'OldvehicleController@statusVehicle')->name('statusVehicle');
+    Route::get('/destroy-vehicle-image', 'OldvehicleController@destroyVehicleImage')->name('destroyVehicleImage');
+});
+
+Route::prefix('oldvehicle')->group(function () {
 });

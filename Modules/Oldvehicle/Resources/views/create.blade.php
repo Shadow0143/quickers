@@ -56,17 +56,20 @@
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
+                                                @if($data)
+                                                <input type="hidden" name="id" id="id" value="{{$data->id}}">
+                                                @endif
                                                 <div class="col-12">
                                                     <label for="type">Type <span class="text-danger">*</span>
                                                     </label>
                                                     <br>
                                                     <input type="radio" name="type" id="type " value="new" @if($data)
-                                                        @if($data->type=='new') checked @endif
+                                                        @if($data->vehicle_type=='new') checked @endif
                                                     @endif class="typefield @error('title') is-invalid @enderror">
                                                     New &nbsp;
                                                     <input type="radio" name="type" id="type " value="old"
                                                         class="typefield @error('type') is-invalid @enderror" @if($data)
-                                                        @if($data->type=='old') checked
+                                                        @if($data->vehicle_type=='old') checked
                                                     @endif @endif>
                                                     Old
 
@@ -81,12 +84,20 @@
                                                     <select name="category" id="category"
                                                         class="form-control @error('category') is-invalid @enderror">
                                                         <option value="">Please Select</option>
-                                                        <option value="motorCycle">Motor cycle</option>
-                                                        <option value="adaptedVehicle">Adapted Vehicle</option>
-                                                        <option value="" eRickshaw>E-Rickshaw</option>
-                                                        <option value="eCart">E-cart </option>
-                                                        <option value="cars">Cars</option>
-                                                        <option value="transportVehicle">Transport Vehicle</option>
+                                                        <option value="motorCycle" {{($data->category ==='motorCycle') ?
+                                                            'selected' : ''}} >Motor cycle</option>
+                                                        <option value="adaptedVehicle" {{($data->category
+                                                            ==='adaptedVehicle') ?
+                                                            'selected' : ''}}>Adapted Vehicle</option>
+                                                        <option value="eRickshaw" {{($data->category ==='eRickshaw') ?
+                                                            'selected' : ''}} >E-Rickshaw</option>
+                                                        <option value="eCart" {{($data->category ==='eCart') ?
+                                                            'selected' : ''}}>E-cart </option>
+                                                        <option value="cars" {{($data->category ==='cars') ?
+                                                            'selected' : ''}}>Cars</option>
+                                                        <option value="transportVehicle" {{($data->category
+                                                            ==='transportVehicle') ?
+                                                            'selected' : ''}}>Transport Vehicle</option>
 
                                                     </select>
                                                     @error('category')
@@ -223,9 +234,10 @@
                                                         @foreach ($image as $key3=>$val3)
                                                         <div class="card col-3 updateimg{{$val3->id}}">
                                                             <a href="javaScript:void(0);" title="delete"
-                                                                data-id="{{$val3->id}}" class="deleteimage">X</a>
-                                                            <img src="{{asset('houseImage')}}/{{$val3->image}}"
-                                                                alt="images">
+                                                                data-id="{{$val3->id}}" class="deleteimage"
+                                                                onclick="deleteimage('{{$val3->id}}')">X</a>
+                                                            <img src="{{asset('vehicleImages')}}/{{$val3->image}}"
+                                                                alt="images" width="200px">
                                                         </div>
                                                         @endforeach
                                                     </div>
@@ -293,4 +305,23 @@
     </div>
 
 </div>
+@endsection
+
+@section('js')
+<script>
+    function deleteimage(id){
+        var id = id;
+        $.ajax({
+            url:"{{route('destroyVehicleImage')}}",
+            type:'GET',
+            data:{
+                id:id
+            },
+            success:function(data){
+                $('.updateimg'+id).css('display','none');
+            }
+        });
+    }
+</script>
+
 @endsection

@@ -89,10 +89,9 @@
                     <div class="card-body" id="resultdata">
 
                         <div class="container">
-                            {{-- @foreach ($allhouse as $key => $val)
-
+                            @foreach ($vehicle as $key => $val)
                             <div class="card-new ">
-                                @if ($val->appartment_for=='new')
+                                @if ($val->vehicle_type=='new')
                                 <img src="{{asset('assets/blink.gif')}}" alt="blink-new" class="blinkimg">
                                 @else
 
@@ -102,9 +101,9 @@
                                         data-ride="carousel">
 
                                         <div class="carousel-inner">
-                                            @foreach ($val->posts as $key2=>$val2)
+                                            @foreach ($val->images as $key2=>$val2)
                                             <div class="carousel-item @if($key2==0)active @endif">
-                                                <img src="{{asset('houseImage')}}/{{$val2->image}}"
+                                                <img src="{{asset('vehicleImages')}}/{{$val2->image}}"
                                                     alt="{{$val2->image}}" />
                                             </div>
                                             @endforeach
@@ -130,11 +129,12 @@
                                             </h4>
                                         </div>
                                         <div class="col">
-                                            <span class="tag tag-teal"> {{$val->availabel}} </span>
+                                            <span class="tag tag-teal"> {{$val->available}} </span>
                                         </div>
-                                        <div class="col ">
+                                        <div class="col">
                                             <h4>
-                                                <a href="{{route('editHome',['id'=>$val->id])}}" title="Edit" class="">
+                                                <a title="Edit" class=""
+                                                    href="{{route('editVehicle',['id'=>$val->id])}}">
                                                     <i class="las la-ellipsis-v"> </i>
                                                 </a>
                                             </h4>
@@ -144,25 +144,9 @@
 
                                     <p>Price :
                                         <i class="las la-rupee-sign"></i> {{$val->price}} /-
-                                        @if($val->appartment_for=='new')
-
-                                        @else
-                                        <span> for {{$val->duration}} </span>
-                                        @endif
-
 
                                     </p>
-                                    <p>
-                                        @if ($val->bedrooms)
-                                        <i class=" las la-bed" title="Bedrooms"></i> {{$val->bedrooms}} &nbsp;
-                                        @endif
-                                        @if ($val->bathrooms)
-                                        <i class=" las la-bath" title="Bathrooms"></i> {{$val->bathrooms}} &nbsp;
-                                        @endif
-                                        @if ($val->size)
-                                        <i class=" las la-hotel" title="Size"></i>{{$val->size}}
-                                        @endif
-                                    </p>
+
                                     <p>
                                         Address : {{$val->city}},{{$val->state}},{{$val->address}},{{$val->pin}}
                                     </p>
@@ -179,7 +163,8 @@
                                     <p>
                                         {{date('d M ,Y',strtotime($val->created_at))}}
                                         <br>
-                                        <a href="javaScript:void(0);" data-id="{{$val->id}}" class="knowmore">
+                                        <a href="javaScript:void(0);" data-id="{{$val->id}}" class="knowmore"
+                                            onclick="knowmore('{{$val->id}}')">
                                             Know more <i class=" las la-arrow-righ"></i>
                                         </a><br>
                                         @if ($val->latitude && $val->longitude)
@@ -199,9 +184,9 @@
                             </div>
                             @endforeach
                             <span style="">
-                                {{ $allhouse->links() }}
+                                {{ $vehicle->links() }}
 
-                            </span> --}}
+                            </span>
                         </div>
                         <!--end card-body-->
                     </div>
@@ -224,7 +209,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Property Detail</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Vehicle Detail</h5>
                     <button type="button" class="close btn btn-outline-primary" data-dismiss="modal" aria-label="Close"
                         onclick="hidemodal()">
                         <span aria-hidden="true">&times;</span>
@@ -245,7 +230,7 @@
                                     </h4>
                                 </div>
                                 <div class="col">
-                                    <span class="tag tag-teal" id="detailavailabel"> </span>
+                                    <span class="tag tag-teal" id="detailavailable"> </span>
                                 </div>
                                 <div class="col">
 
@@ -258,15 +243,6 @@
 
 
 
-                            </p>
-
-                            <p>
-
-                                <i class=" las la-bed" title="Bedrooms"></i> <span id="bedrooms"></span> &nbsp;
-
-                                <i class=" las la-bath" title="Bathrooms"></i> <span id="bathrooms"></span> &nbsp;
-
-                                <i class=" las la-hotel" title="Size"></i> <span id="size"></span>
                             </p>
                             <p>
                                 <span id="detaildescription"></span>
@@ -291,4 +267,46 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $('.checkable').live('change', function() {
+            var val = $(this).val();
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{route('statusVehicle')}}",
+                type:'GET',
+                data:{id:id,value:val},
+                success:function(data){
+                    $('#status'+id).html(data);
+                    window.location.reload();
+                }
+            });
+        });
+
+
+        function knowmore(id){
+            var id = id;
+            $.ajax({
+                url: "{{route('showVehicle')}}",
+                type:'GET',
+                data:{id:id},
+                success:function(data){
+                    $('#detailtitle').html(data.title);
+                    $('#detailavailable').html(data.available);
+                    $('#detailsprice').html(data.price);
+                    $('#detailscity').html(data.city);
+                    $('#detailsstate').html(data.state);
+                    $('#detaildescription').html(data.description);
+                    $('#detailsaddress').html(data.address);
+                    $('#detailspin').html(data.pin);
+                    $('#detailsstatus').html(data.status);
+                    $('.slider').html(data.slider);
+                    $('#detailsdate').html(new Date(data.created_at).toLocaleDateString("en-US",options));
+                    $('#knowmoremodal').modal('show');
+                }
+            });
+        }
+</script>
 @endsection
