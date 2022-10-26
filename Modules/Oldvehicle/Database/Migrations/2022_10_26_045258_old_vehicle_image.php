@@ -13,12 +13,12 @@ class OldVehicleImage extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle_images', function (Blueprint $table) {
+        Schema::create('old_vehicle_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id');
             $table->string('image');
             $table->timestamps();
-            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreign('vehicle_id')->references('id')->on('old_vehicles')->onDelete('cascade');
         });
     }
 

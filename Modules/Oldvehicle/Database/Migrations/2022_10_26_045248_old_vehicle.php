@@ -13,7 +13,7 @@ class OldVehicle extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('old_vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('vehicle_type')->nullable();
             $table->string('category');
