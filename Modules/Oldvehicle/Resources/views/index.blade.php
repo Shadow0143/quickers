@@ -271,6 +271,10 @@
 
 @section('js')
 <script>
+    function hidemodal(){
+        $('#knowmoremodal').modal('hide');
+    }
+
     $('.checkable').live('change', function() {
             var val = $(this).val();
             var id = $(this).data('id');
