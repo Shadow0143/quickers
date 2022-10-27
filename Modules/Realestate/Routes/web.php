@@ -11,6 +11,14 @@
 |
 */
 
-Route::prefix('realestate')->group(function() {
-    Route::get('/', 'RealestateController@index');
+Route::prefix('realestate')->group(function () {
+    Route::get('/', 'RealestateController@realestateIndex')->name('realestateIndex');
+    Route::get('/create-property', 'RealestateController@createProperty')->name('createProperty');
+    Route::post('/submit-property', 'RealestateController@submitProperty')->name('submitProperty');
+    Route::get('/delete-property-image', 'RealestateController@deleteImage')->name('deleteImage');
+    Route::get('/edit-property/{id}', 'RealestateController@editProperty')->name('editProperty');
+    Route::get('/update-status', 'RealestateController@updateStatus')->name('updateStatus');
+    Route::get('/view-more', 'RealestateController@viewMore')->name('viewMore');
+    Route::get('/search-by-keywords', 'RealestateController@searchKeyWords')->name('searchKeyWords');
+    Route::get('/search-by-prce-order', 'RealestateController@searchByPriceOrder')->name('searchByPriceOrder');
 });

@@ -10,9 +10,14 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
     protected static function newFactory()
     {
         return \Modules\Realestate\Database\factories\PropertyFactory::new();
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(PropertyImage::class);
     }
 }

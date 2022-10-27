@@ -84,20 +84,22 @@
                                                     <select name="category" id="category"
                                                         class="form-control @error('category') is-invalid @enderror">
                                                         <option value="">Please Select</option>
-                                                        <option value="motorCycle" {{($data->category ==='motorCycle') ?
-                                                            'selected' : ''}} >Motor cycle</option>
-                                                        <option value="adaptedVehicle" {{($data->category
-                                                            ==='adaptedVehicle') ?
-                                                            'selected' : ''}}>Adapted Vehicle</option>
-                                                        <option value="eRickshaw" {{($data->category ==='eRickshaw') ?
-                                                            'selected' : ''}} >E-Rickshaw</option>
-                                                        <option value="eCart" {{($data->category ==='eCart') ?
-                                                            'selected' : ''}}>E-cart </option>
-                                                        <option value="cars" {{($data->category ==='cars') ?
-                                                            'selected' : ''}}>Cars</option>
-                                                        <option value="transportVehicle" {{($data->category
-                                                            ==='transportVehicle') ?
-                                                            'selected' : ''}}>Transport Vehicle</option>
+                                                        <option value="motorCycle" @if($data) {{($data->category
+                                                            =='motorCycle') ?
+                                                            'selected' : ''}} @endif>Motor cycle</option>
+                                                        <option value="adaptedVehicle" @if($data) {{($data->category
+                                                            =='adaptedVehicle') ?
+                                                            'selected' : ''}} @endif>Adapted Vehicle</option>
+                                                        <option value="eRickshaw" @if($data) {{($data->category
+                                                            =='eRickshaw') ?
+                                                            'selected' : ''}} @endif>E-Rickshaw</option>
+                                                        <option value="eCart" @if($data) {{($data->category =='eCart') ?
+                                                            'selected' : ''}} @endif>E-cart </option>
+                                                        <option value="cars" @if($data) {{($data->category =='cars') ?
+                                                            'selected' : ''}} @endif>Cars</option>
+                                                        <option value="transportVehicle" @if($data) {{($data->category
+                                                            =='transportVehicle') ?
+                                                            'selected' : ''}} @endif>Transport Vehicle</option>
 
                                                     </select>
                                                     @error('category')

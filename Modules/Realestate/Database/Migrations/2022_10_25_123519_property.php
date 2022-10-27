@@ -31,7 +31,7 @@ class Property extends Migration
             $table->string('furnished')->nullable();
             $table->string('appliances')->nullable();
             $table->string('air_conditioning')->nullable();
-            $table->string('outdore_space')->nullable();
+            $table->string('outdoor_space')->nullable();
             $table->string('smoking_permit')->nullable();
             $table->string('amenities')->nullable();
             $table->longText('description');

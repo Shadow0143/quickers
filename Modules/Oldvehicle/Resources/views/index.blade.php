@@ -84,6 +84,44 @@
                             </div>
                         </div>
                     </div> --}}
+                    <div class="col-12 m-5">
+                        <div class="row pl-5<">
+                            <div class="col-3">
+                                <label for="type">Search Type</label>
+                                <select name="searchtype" id="searchtype" class="form-control">
+                                    <option value="">Please select </option>
+                                    <option value="title">Title</option>
+                                    <option value="city">City</option>
+                                    <option value="pin">Pin</option>
+                                    <option value="created_at">Date</option>
+                                </select>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="Searchkeyword">Search Keyword</label>
+                                <input type="text" name="searchkeyword" id="searchkeyword" class="form-control"
+                                    placeholder="Please type search keywords">
+                            </div>
+
+                            <div class="col-3">
+                                <a href="javaScript:void(0);" class="searchbtn" title="Search"> <i
+                                        class="las la-search"></i> Search
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a href="javaScript:void(0);" title="Short By" class="ascprice" data-order="ASC"
+                                    id="asc"> <i class=" las la-filter"></i>
+                                    Short By Price(Low to High)
+                                </a>
+                                <a href="javaScript:void(0);" title="Short By" class="ascprice" data-order="DESC"
+                                    id="desc" style="display:none"> <i class=" las la-filter"></i>
+
+                                    Short By Price(High to Low)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!--end card-body-->
                     <div class="card-body" id="resultdata">
@@ -312,5 +350,51 @@
                 }
             });
         }
+
+
+
+
+        $('.searchbtn').on('click',function(){
+
+            var keyword = $('#searchkeyword').val();
+            var type = $('#searchtype').val();
+            $.ajax({
+                url:"{{route('searchKeyWordsVehicle')}}",
+                type:"GET",
+                data:{keyword:keyword,type:type},
+                success:function(data){
+                    $('#resultdata').html(data);
+                }
+            });
+
+        });
+
+
+        $('.ascprice').on('click',function(){
+            var keyword = $('#searchByPriceOrderVehicle').val();
+            var type = $('#searchtype').val();
+            var order = $(this).data('order');
+
+            $.ajax({
+                url:"{{route('searchByPriceOrder')}}",
+                type:"GET",
+                data:{keyword:keyword,type:type,order:order},
+                success:function(data){
+                    if(order =='ASC'){
+                        $('#asc').css('display','none');
+                        $('#desc').css('display','block');
+                    }else{
+                        $('#asc').css('display','block');
+                        $('#desc').css('display','none');
+                    }
+                    $('#resultdata').html(data);
+                }
+            });
+
+        });
+
+
+
+
 </script>
 @endsection

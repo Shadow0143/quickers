@@ -19,6 +19,8 @@ Route::prefix('oldvehicle')->group(function () {
     Route::get('/show-vehicle', 'OldvehicleController@showVehicle')->name('showVehicle');
     Route::get('/status-vehicle', 'OldvehicleController@statusVehicle')->name('statusVehicle');
     Route::get('/destroy-vehicle-image', 'OldvehicleController@destroyVehicleImage')->name('destroyVehicleImage');
+    Route::get('/search-by-keyword-vehicles', 'OldvehicleController@searchKeyWordsVehicle')->name('searchKeyWordsVehicle');
+    Route::get('/search-price-order-vehicle', 'OldvehicleController@searchByPriceOrderVehicle')->name('searchByPriceOrderVehicle');
 });
 
 Route::prefix('oldvehicle')->group(function () {

@@ -78,9 +78,9 @@ class OldvehicleController extends Controller
                         $vehicleImage->save();
                     }
                 }
-                return redirect()->route('vehicleIndex')->with('message', 'Updated successfully!');;
+                return redirect()->route('vehicleIndex')->with('message', 'Updated successfully!');
             } catch (\Exception $e) {
-                return back()->with('error', 'Please try again!');;
+                return back()->with('error', 'Please try again!');
             }
         } else {
             $validator = $request->validate([
@@ -228,5 +228,21 @@ class OldvehicleController extends Controller
         $update->save();
         $data = $request->value;
         return $data;
+    }
+
+    public function searchKeyWordsVehicle(Request $request)
+    {
+        $vehicle = OldVehicle::where($request->type, 'like', '%' . $request->keyword . '%')->get();
+        return view('oldvehicle::ajax_filter', compact('vehicle'));
+    }
+
+    public function searchByPriceOrderVehicle(Request $request)
+    {
+        if ($request->type) {
+            $vehicle = OldVehicle::where($request->type, 'like', '%' . $request->keyword . '%')->orderBy('price', $request->order)->get();
+        } else {
+            $vehicle = OldVehicle::orderBy('price', $request->order)->get();
+        }
+        return view('oldvehicle::ajax_filter', compact('vehicle'));
     }
 }
