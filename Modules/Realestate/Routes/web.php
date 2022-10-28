@@ -21,4 +21,8 @@ Route::prefix('realestate')->group(function () {
     Route::get('/view-more', 'RealestateController@viewMore')->name('viewMore');
     Route::get('/search-by-keywords', 'RealestateController@searchKeyWords')->name('searchKeyWords');
     Route::get('/search-by-prce-order', 'RealestateController@searchByPriceOrder')->name('searchByPriceOrder');
+
+
+
+    Route::get('/search-by-prce-order', 'RazorpayPaymentController@searchByPriceOrder')->name('searchByPriceOrder');
 });

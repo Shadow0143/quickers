@@ -21,3 +21,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/contact-me', [App\Http\Controllers\HomeController::class, 'contactMe'])->name('contactMe');
+Route::post('/submit-contact', [App\Http\Controllers\HomeController::class, 'submitContact'])->name('submitContact');

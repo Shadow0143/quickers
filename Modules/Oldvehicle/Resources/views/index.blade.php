@@ -376,7 +376,7 @@
             var order = $(this).data('order');
 
             $.ajax({
-                url:"{{route('searchByPriceOrder')}}",
+                url:"{{route('searchByPriceOrderVehicle')}}",
                 type:"GET",
                 data:{keyword:keyword,type:type,order:order},
                 success:function(data){

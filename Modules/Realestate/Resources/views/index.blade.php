@@ -147,6 +147,9 @@
                                             </h4>
 
                                         </div>
+                                        <div class="col">
+                                            <a href=" " class="btn btn-outline-danger">Order Now</a>
+                                        </div>
                                     </div>
 
                                     <p>Price :

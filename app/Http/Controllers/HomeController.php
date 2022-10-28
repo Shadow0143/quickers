@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function contactMe()
+    {
+        return view('contact');
+    }
+
+    public function submitContact(Request $request)
+    {
+        dd($request->all());
+    }
 }
