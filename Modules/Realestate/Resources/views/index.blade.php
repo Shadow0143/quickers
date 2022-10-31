@@ -148,7 +148,8 @@
 
                                         </div>
                                         <div class="col">
-                                            <a href=" " class="btn btn-outline-danger">Order Now</a>
+                                            <a href="{{route('paymentView',['id'=>$val->id])}}"
+                                                class="btn btn-outline-danger">Order Now</a>
                                         </div>
                                     </div>
 

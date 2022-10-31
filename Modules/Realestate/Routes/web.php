@@ -23,6 +23,6 @@ Route::prefix('realestate')->group(function () {
     Route::get('/search-by-prce-order', 'RealestateController@searchByPriceOrder')->name('searchByPriceOrder');
 
 
-
-    Route::get('/search-by-prce-order', 'RazorpayPaymentController@searchByPriceOrder')->name('searchByPriceOrder');
+    Route::get('/payment-view/{id}', 'RazorpayPaymentController@paymentView')->name('paymentView');
+    Route::post('/submit-payment', 'RazorpayPaymentController@submitPayment')->name('paymentView');
 });

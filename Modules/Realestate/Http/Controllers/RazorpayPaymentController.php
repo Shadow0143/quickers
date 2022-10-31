@@ -76,4 +76,10 @@ class RazorpayPaymentController extends Controller
     {
         //
     }
+
+
+    public function paymentView($id)
+    {
+        return view('realestate::razorpay_form');
+    }
 }
